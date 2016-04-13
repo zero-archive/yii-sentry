@@ -1,5 +1,8 @@
 # YiiSentry
 
+[![Latest Stable Version](https://poser.pugx.org/dotzero/yii-sentry/version)](https://packagist.org/packages/dotzero/yii-sentry)
+[![License](https://poser.pugx.org/dotzero/yii-sentry/license)](https://packagist.org/packages/dotzero/yii-sentry)
+
 **YiiSentry** is an extension for the Yii PHP framework that allows developers to push messages and logs to the [Sentry](https://getsentry.com/) service or your own **Sentry server**.
 
 ## Requirements:
@@ -21,7 +24,7 @@
         'enabled' => true, // Enabled or disabled extension (optional)
         'dsn' => '[YOUR_DSN_FROM_SENTRY_SERVER]',
         // Raven PHP options (https://github.com/getsentry/raven-php#configuration)
-        'options' => array( 
+        'options' => array(
             'site' => 'example.com',
             'tags' => array(
                 'php_version' => phpversion(),

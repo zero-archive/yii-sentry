@@ -2,12 +2,14 @@
 /**
  * ESentryLogRoute class file.
  *
- * @package YiiSentry
+ * @package ESentry
+ * @version 1.0
  * @author dotzero <mail@dotzero.ru>
- * @link http://www.dotzero.ru
- * @link https://github.com/dotzero/YiiSentry
- * @license MIT
- * @version 1.0 (11-jun-2014)
+ * @link http://www.dotzero.ru/
+ * @link https://github.com/dotzero/yii-sentry
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
