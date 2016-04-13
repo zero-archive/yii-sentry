@@ -1,5 +1,5 @@
 {
-    "name": "dotzero/yii-insertupdate-behavior",
+    "name": "dotzero/yii-sentry",
     "description": "The Yii Sentry extension that allows developers to push messages and logs to the Sentry service or your own Sentry server",
     "license": "MIT",
     "keywords": ["yii", "extension", "behavior"],
