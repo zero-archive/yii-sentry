@@ -7,23 +7,32 @@
 
 ## Requirements:
 
-* Yii Framework 1.1.0 or later
-* [raven-php](https://github.com/getsentry/raven-php)
+- [Yii Framework](https://github.com/yiisoft/yii) 1.1.14 or above
+- [Composer](http://getcomposer.org/doc/)
 
-## Installation:
+## Install
 
-- Extract the release folder `ESentry` under `protected/extensions`
-- Download and extract [raven-php](https://github.com/getsentry/raven-php) under `protected/vendors/Raven`
-- Add the following to your **config file** `components` section:
+### Via composer:
+
+```bash
+$ composer require dotzero/yii-sentry
+```
+
+- Add vendor path to your configuration file, attach component and set properties.
 
 ```php
-<?php
+'aliases' => array(
+    ...
+    'vendor' => realpath(__DIR__ . '/../../vendor'),
+),
+'components' => array(
+    ...
     'sentry' => array(
-        'class' => 'ext.ESentry.ESentry',
-        'ravenDir' => 'application.vendors.Raven', // Path alias of the raven-php directory (optional)
+        'class' => 'vendor.dotzero.yii-sentry.ESentry',
+        'sentryDir' => 'vendor.sentry.sentry', // Path alias of the sentry-php directory (optional)
         'enabled' => true, // Enabled or disabled extension (optional)
         'dsn' => '[YOUR_DSN_FROM_SENTRY_SERVER]',
-        // Raven PHP options (https://github.com/getsentry/raven-php#configuration)
+        // Raven PHP options (https://github.com/getsentry/sentry-php#configuration)
         'options' => array(
             'site' => 'example.com',
             'tags' => array(
@@ -31,17 +40,40 @@
             ),
         ),
     ),
+),
 ```
 
-- Add the following to your config file 'log' section to enable ESentryLogRoute:
+- Add the following to your config file `log` section to enable `ESentryLogRoute`:
 
 ```php
-<?php
-    'routes' => array(
-        ...
-        array(
-            'class' => 'application.extensions.ESentry.ESentryLogRoute',
-            'levels' => 'error, warning',
-        ),
+'routes' => array(
+    ...
+    array(
+        'class' => 'vendor.dotzero.yii-sentry.ESentryLogRoute',
+        'levels' => 'error, warning',
     ),
+),
 ```
+
+## Usage:
+
+```php
+// To capture Message
+$sentry = Yii::app()->sentry;
+$sentry->captureMessage('test', array(
+    'param1' => 'value1',
+    'param2' => 'value2',
+));
+
+// To capture Exception
+try {
+    throw new Exception('Error Processing Request', 1);
+} catch (Exception $e) {
+    $sentry = Yii::app()->sentry;
+    $sentry->captureException($e);
+}
+```
+
+## License
+
+Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
