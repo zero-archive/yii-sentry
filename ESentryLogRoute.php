@@ -17,33 +17,39 @@
  * to the Sentry (https://getsentry.com/) service or your own Sentry server.
  *
  * Requirements:
- * Yii Framework 1.1.0 or later
- * raven-php
+ * - Yii Framework 1.1.14 or above
  *
  * Installation:
- * - Extract ESentry folder under 'protected/extensions'
- * - Download and extract raven-php (https://github.com/getsentry/raven-php) under 'protected/vendors'
- * - Add the following to your config file 'components' section:
  *
- *  'sentry' => array(
- *      'class' => 'ext.ESentry.ESentry',
- *      'ravenDir' => 'application.vendors.Raven', // Path alias of the raven-php directory (optional)
- *      'enabled' => true, // Enabled or disabled extension (optional)
- *      'dsn' => '[YOUR_DSN_FROM_SENTRY_SERVER]',
- *      'options' => array( // Raven PHP options (https://github.com/getsentry/raven-php#configuration)
- *          'site' => 'example.com',
- *          'tags' => array(
- *              'php_version' => phpversion(),
+ * - Add vendor path to your configuration file, attach component and set properties:
+ *
+ * 'aliases' => array(
+ *      ...
+ *      'vendor' => realpath(__DIR__ . '/../../vendor'),
+ *  ),
+ *  'components' => array(
+ *      ...
+ *      'sentry' => array(
+ *          'class' => 'vendor.dotzero.yii-sentry.ESentry',
+ *          'sentryDir' => 'vendor.sentry.sentry', // Path alias of the sentry-php directory (optional)
+ *          'enabled' => true, // Enabled or disabled extension (optional)
+ *          'dsn' => '[YOUR_DSN_FROM_SENTRY_SERVER]',
+ *          // Raven PHP options (https://github.com/getsentry/sentry-php#configuration)
+ *          'options' => array(
+ *              'site' => 'example.com',
+ *              'tags' => array(
+ *                  'php_version' => phpversion(),
+ *              ),
  *          ),
  *      ),
- *  ),
+ * ),
  *
- *  - Add the following to your config file 'log' section to enable ESentryLogRoute:
+ *  - Add the following to your config file log section to enable ESentryLogRoute:
  *
  *  'routes' => array(
  *      ...
  *      array(
- *          'class' => 'application.extensions.ESentry.ESentryLogRoute',
+ *          'class' => 'vendor.dotzero.yii-sentry.ESentryLogRoute',
  *          'levels' => 'error, warning',
  *      ),
  *  ),

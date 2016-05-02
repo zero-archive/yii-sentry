@@ -18,7 +18,7 @@
 $ composer require dotzero/yii-sentry
 ```
 
-- Add vendor path to your configuration file, attach component and set properties.
+- Add vendor path to your configuration file, attach component and set properties:
 
 ```php
 'aliases' => array(
