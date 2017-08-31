@@ -84,11 +84,8 @@ class ESentryLogRoute extends CLogRoute
 
         if ($client) {
             foreach ($logs AS $log) {
-                $format = explode("\n", $log[0]);
-                $message = strip_tags(array_shift($format));
-
                 $client->captureMessage(
-                    $message,
+                    $log[0],
                     array(
                         'level' => $log[1],
                         'category' => $log[2],
