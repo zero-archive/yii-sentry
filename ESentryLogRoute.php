@@ -84,15 +84,14 @@ class ESentryLogRoute extends CLogRoute
 
         if ($client) {
             foreach ($logs AS $log) {
-                $strings = explode(PHP_EOL, $log[0]);
- +              $reg = '/(\#[0-9]+ [\/a-zA-Z0-9.]+?)(\([0-9]+\):\ ?)([^\(]*)(\(.*\))/';
- +              $replace = '$1$2$3()';
- +              $result = preg_replace($reg, $replace, $strings);
- +              $trace = implode(PHP_EOL, $result);
- +
+               $strings = explode(PHP_EOL, $log[0]);
+               $reg = '/(\#[0-9]+ [\/a-zA-Z0-9.]+?)(\([0-9]+\):\ ?)([^\(]*)(\(.*\))/';
+               $replace = '$1$2$3()';
+               $result = preg_replace($reg, $replace, $strings);
+               $trace = implode(PHP_EOL, $result);
+ 
                 $client->captureMessage(
- -                  $log[0],
- +                  $trace,
+                    $trace,
                     array(
                         'level' => $log[1],
                         'category' => $log[2],
